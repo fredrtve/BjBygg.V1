@@ -1,0 +1,96 @@
+@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Logg inn";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="apple-touch-icon" sizes="152x152" href="~/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png">
+    <link rel="manifest" href="~/manifest.json">
+    <link rel="mask-icon" href="~/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#2f2f2f">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/7f0718ff8e.js" crossorigin="anonymous"></script>
+    <style>
+input[type="text"] {
+  display: block;
+  width: 400px;
+  margin: 0 0 20px;
+  padding: 8px 12px 10px 12px;
+  border: 1px solid rgba(0,0,0,.5);
+  background: rgba(0,0,0,.25);
+  color:white;
+}
+input[type="password"] {
+  display: block;
+  width: 400px;
+  margin: 0 0 20px;
+  padding: 8px 12px 10px 12px;
+  border: 1px solid rgba(0,0,0,.5);
+  background: rgba(0,0,0,.25);
+  color:white;
+}
+input[type="text"]:focus{
+  border: none;
+  outline: none;
+  color: #fff;
+  background: rgba(0,0,0,.25);
+}
+input[type="password"]:focus{
+  border: none;
+  outline: none;
+  color: #fff;
+  background: rgba(0,0,0,.25);
+}
+    </style>
+</head>
+<body class="d-flex justify-content-center bg-dark text-warning">
+
+    <form id="account" method="post" class="text-center ">
+        <img src="/android-chrome-144x144.png" class="m-4" style="width:120px;height:120px" />
+        <br />
+
+        <b><label asp-for="Input.Username"></label></b>
+        <div class="form-row input-group m-0">
+            <div class="input-group-prepend" style="z-index:10">
+                <div class="input-group-text bg-warning border-warning text-dark"><i class="fa fa-user" aria-hidden="true"></i></div>
+            </div>
+            <input asp-for="Input.Username" type="text" class="form-control" />
+        </div>
+        <span asp-validation-for="Input.Username" class="text-danger"></span>
+        <br />
+
+        <b><label asp-for="Input.Password"></label></b>
+            <div class="form-row input-group m-0">
+                <div class="input-group-prepend" style="z-index:10">
+                    <div class="input-group-text bg-warning border-warning text-dark"><i class="fa fa-key" aria-hidden="true"></i></div>
+                </div>
+                <input asp-for="Input.Password" type="password" class="form-control" />
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <br />
+            <div class="checkbox ">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+            <div class="form-row input-group m-0">
+                <button type="submit" class="btn btn-warning btn-block mt-2"><b><i class="fa fa-unlock mr-2" aria-hidden="true"></i>Logg inn</b></button>
+            </div>
+    </form>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

@@ -1,0 +1,60 @@
+@page
+@model CleanArchitecture.Web.Pages.Missions.EditModel
+@{
+    ViewData["Title"] = "Endre";
+    ViewData["NavTitle"] = "ENDRE";
+    ViewData["NavIcon"] = "fa fa-pencil";
+    ViewData["GoogleMapsApiKey"] = Model.GoogleMapsApiKey;
+}
+
+<form class="p-2" method="post" id="updateForm">
+    <div class="form-group">
+        <label asp-for="Mission.Address"></label>
+        <input asp-for="Mission.Address" class="form-control" placeholder="Skriv inn addresse">
+        <span asp-validation-for="Mission.Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mission.PhoneNumber"></label>
+        <input asp-for="Mission.PhoneNumber" class="form-control" placeholder="Skriv inn kontaktnummer">
+        <span asp-validation-for="Mission.PhoneNumber" class="text-danger"></span>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mission.Description"></label>
+        <textarea asp-for="Mission.Description" class="form-control"></textarea>
+        <span asp-validation-for="Mission.Description" class="text-danger"></span>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mission.EmployerId"></label>
+        <select asp-for="Mission.EmployerId" asp-items="Model.Employers" class="form-control"></select>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mission.MissionTypeId"></label>
+        <select asp-for="Mission.MissionTypeId" asp-items="Model.Types" class="form-control"></select>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <input asp-for="Mission.Id" type="hidden" />
+    <input type="submit" id="submitForm" style="display:none" />
+</form>
+
+@section BottomMenuBar {
+    <a asp-page="./Mission" asp-route-id="@Model.Mission.Id" class="mobile-bottom-nav__item text-danger border-warning">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-close"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
+    <a onclick="document.getElementById('submitForm').click(); return false;" class="mobile-bottom-nav__item text-success border-warning">
+        <div class="mobile-
+                    bottom-nav__item-content">
+            <i class="fa fa-check"></i>
+        </div>
+    </a>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_GoogleSearchBox", "Mission_Address");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

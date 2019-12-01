@@ -1,0 +1,48 @@
+@page
+@model CleanArchitecture.Web.Pages.Employers.CreateModel
+@{
+    ViewData["Title"] = "Opprett ny";
+    ViewData["NavTitle"] = "OPPRETT NY";
+    ViewData["NavIcon"] = "fa fa-pencil";
+    ViewData["GoogleMapsApiKey"] = Model.GoogleMapsApiKey;
+}
+
+<form class="p-2" method="post" id="createForm">
+    <div class="form-group">
+        <label asp-for="Employer.Name">Navn</label>
+        <input asp-for="Employer.Name" class="form-control" placeholder="Skriv inn navn">
+        <span asp-validation-for="Employer.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Employer.Address">Adresse</label>
+        <input asp-for="Employer.Address" class="form-control" placeholder="Skriv inn addresse">
+        <span asp-validation-for="Employer.Address" class="text-danger"></span>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Employer.PhoneNumber">Kontaktnummer</label>
+        <input asp-for="Employer.PhoneNumber" class="form-control" placeholder="Skriv inn kontaktnummer">
+        <span asp-validation-for="Employer.PhoneNumber" class="text-danger"></span>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <input type="submit" id="submitForm" style="display:none" />
+</form>
+
+@section BottomMenuBar {
+    <a asp-page="./Index" class="mobile-bottom-nav__item border-warning text-danger">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-close"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
+    <a onclick="document.getElementById('submitForm').click(); return false;" class="mobile-bottom-nav__item text-success border-warning">
+        <div class="mobile-
+                    bottom-nav__item-content">
+            <i class="fa fa-check"></i>
+        </div>
+    </a>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_GoogleSearchBox", "Employer_Address");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

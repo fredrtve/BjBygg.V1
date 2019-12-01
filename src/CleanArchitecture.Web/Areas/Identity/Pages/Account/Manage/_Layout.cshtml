@@ -1,0 +1,16 @@
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+<div class="d-flex flex-column">
+
+        <partial name="_ManageNav" />
+        <div class="bg-dark pt-2"></div>
+            <div class="p-2">
+                @RenderBody()
+            </div>
+        </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

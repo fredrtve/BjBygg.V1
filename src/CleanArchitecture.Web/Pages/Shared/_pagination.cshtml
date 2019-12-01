@@ -1,0 +1,14 @@
+@model PaginationInfoViewModel
+                    <nav class="bottom-nav-2 bg-warning text-dark d-flex flex-row text-center align-items-center justify-content-center text-white" style="height:35px;">
+                        <a  id="Previous" asp-route-pageid="@(Model.ActualPage - 1)" asp-route-searchString = "@Model.CurrentFilter"
+                            aria-label="Previous" class="icon-btn-w25 text-dark border-right border-dark @Model.Previous">
+                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                        </a>
+                        <b class="w-50">Side @(Model.ActualPage + 1) / @Model.TotalPages</b>
+                        <a id="Next" asp-route-pageid="@(Model.ActualPage + 1)" asp-route-searchString = "@Model.CurrentFilter"
+					        aria-label="Next"class="icon-btn-w25 text-dark border-left border-dark @Model.Next">
+                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        </a>
+                      </nav>
+
+

@@ -1,0 +1,36 @@
+@page
+@model CleanArchitecture.Web.Pages.Users.IndexModel
+@{
+    ViewData["Title"] = "Ansatte";
+    ViewData["NavTitle"] = "ANSATTE";
+    ViewData["NavIcon"] = "fa fa-users";
+}
+
+    <div class="d-flex flex-column">
+        @if (Model.LeaderList.Users.Any())
+        {
+            <partial name="_UserList" for="LeaderList" />
+        }
+
+        @if (Model.ManagerList.Users.Any())
+        {
+            <partial name="_UserList" for="ManagerList" />
+        }
+
+        @if (Model.EmployeeList.Users.Any())
+        {
+            <partial name="_UserList" for="EmployeeList" />
+        }
+
+    </div>
+
+@section BottomMenuBar {
+    @if (User.IsInRole("Leder"))
+        {
+    <a asp-page="./Create" class="mobile-bottom-nav__item text-success">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-plus"></i>
+        </div>
+    </a>
+        }
+}

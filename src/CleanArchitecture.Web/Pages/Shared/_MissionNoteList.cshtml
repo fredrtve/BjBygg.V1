@@ -1,0 +1,30 @@
+@model List<MissionNoteViewModel>
+
+@foreach (var missionNote in Model)
+{
+    string icon = missionNote.Pinned ? "fas fa-star text-warning" : "fa fa-sticky-note-o";
+    <li class="list-group-item list-group-item-action bg-secondary text-white" data-toggle="collapse" href="#note@(missionNote.Id)"
+        role="button" aria-expanded="false" aria-controls="note@(missionNote.Id)" onclick="animateCaret(this)">
+        <b class="d-flex flex-row align-items-center justify-content-between">
+            <span class="@icon pr-2"></span>
+            <span class="mr-auto">@(!String.IsNullOrEmpty(missionNote.Title) ? missionNote.Title : missionNote.CreatedAt.ToString("dd/MM/yyyy")) </span>
+            <i class="fa fa-caret-right"></i>
+        </b>
+    </li>
+    <div class="collapse pb-0 pt-2 pl-3 pr-3 bg-dark text-white" id="note@(missionNote.Id)">
+        <p>@missionNote.Content</p>
+        <p>
+            <em>
+                <small>
+                    @missionNote.CreatedAt.ToString("dd/MM/yyyy") av @missionNote.CreatedBy
+                </small>
+            </em>
+            <a class="float-right fa fa-trash text-danger" onclick="return confirm('Bekreft at du ønsker du å slette dette notatet')"
+               asp-page="./Mission" asp-page-handler="DeleteNote" asp-route-noteId="@missionNote.Id" asp-route-missionId="@missionNote.MissionId">
+            </a>
+        </p>
+    </div>
+}
+
+
+

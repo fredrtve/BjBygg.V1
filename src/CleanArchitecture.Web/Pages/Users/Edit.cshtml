@@ -1,0 +1,56 @@
+@page
+@model CleanArchitecture.Web.Pages.Users.EditModel
+@{
+    ViewData["Title"] = "Endre";
+    ViewData["NavTitle"] = "ENDRE";
+    ViewData["NavIcon"] = "fa fa-edit";
+}
+<form class="p-2" method="post" id="editForm">
+    <div class="form-group">
+        <label asp-for="UserView.FirstName"></label>
+        <input asp-for="UserView.FirstName" class="form-control" placeholder="Skriv inn fornavn">
+        <span asp-validation-for="UserView.FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserView.LastName"></label>
+        <input asp-for="UserView.LastName" class="form-control" placeholder="Skriv inn etternavn">
+        <span asp-validation-for="UserView.LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserView.PhoneNumber"></label>
+        <input asp-for="UserView.PhoneNumber" class="form-control" placeholder="Skriv inn mobilnummer">
+        <small class="form-text text-muted">(valgfri)</small>
+        <span asp-validation-for="UserView.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserView.Role"></label>
+        <select asp-for="UserView.Role" asp-items="Model.Roles" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="UserView.Email"></label>
+        <input asp-for="UserView.Email" class="form-control" placeholder="Skriv inn epost">
+        <small class="form-text text-muted">(valgfri)</small>
+        <span asp-validation-for="UserView.Email" class="text-danger"></span>
+    </div>
+    <input asp-for="UserView.UserName" type="hidden" />
+    <input type="submit" id="submitForm" style="display:none" />
+</form>
+
+@section BottomMenuBar {
+    <a asp-page="./Index" class="mobile-bottom-nav__item text-danger">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-close"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
+    <a onclick="document.getElementById('submitForm').click(); return false;" class="mobile-bottom-nav__item text-success">
+        <div class="mobile-
+                    bottom-nav__item-content">
+            <i class="fa fa-check"></i>
+        </div>
+    </a>
+}
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

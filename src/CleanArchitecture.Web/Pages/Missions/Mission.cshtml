@@ -1,0 +1,172 @@
+@page
+@model CleanArchitecture.Web.Pages.Missions.MissionModel
+@{
+    ViewData["Title"] = "Oppdrag";
+    ViewData["NavTitle"] = "OPPDRAG";
+    ViewData["NavIcon"] = "fa fa-tasks";
+}
+
+<ul class="list-group">
+
+    <li class="list-group-item list-group-item-action">
+        <b class="h5 m-0 d-flex flex-row align-items-center" style="font-weight:bold">
+            <span class="fa fa-home pr-3"></span>
+            <span>@Model.Mission.Address</span>
+        </b>
+    </li>
+
+    <a href='@(!String.IsNullOrEmpty(Model.Mission.PhoneNumber) ? "tel:" + Model.Mission.PhoneNumber : "")' class="list-group-item list-group-item-action">
+        <b class="h5 m-0 d-flex flex-row align-items-center justify-content-between" style="font-weight:bold">
+            <span class="fa fa-phone pr-3"></span>
+            <span class="mr-auto">@(!String.IsNullOrEmpty(Model.Mission.PhoneNumber) ? Model.Mission.PhoneNumber : "N/A")</span>
+            <i class="fa fa-external-link-alt text-info"></i>
+        </b>
+    </a>
+
+    <a href="https://www.google.com/maps/dir/?api=1&destination=@Model.Mission.Address&travelmode=driving" class="list-group-item list-group-item-action">
+        <b class="h5 m-0 d-flex flex-row align-items-center justify-content-between" style="font-weight:bold">
+            <span class="fa fa-car pr-3"></span>
+            <span class="mr-auto">Veibeskrivelse</span>
+            <i class="fa fa-external-link-alt text-info"></i>
+        </b>
+    </a>
+
+    <li class="list-group-item list-group-item-action" data-toggle="collapse" href="#notesSection" role="button"
+        aria-expanded="false" aria-controls="notesSection" onclick="animateCaret(this)">
+        <b class="h5 m-0 d-flex flex-row align-items-center justify-content-between" style="font-weight:bold">
+            <span class="fas fa-clipboard pr-3"></span>
+            <span class="mr-auto">Notater</span>
+            <span class="badge badge-warning badge-pill mr-2">@Model.Mission.MissionNoteCount</span>
+            <i class="fa fa-caret-right"></i>
+        </b>
+    </li>
+
+    <div class="collapse" id="notesSection">
+        <ul class="list-group">
+            @if (Model.Mission.MissionNotesPinned.Any())
+            {
+                await Html.RenderPartialAsync("_MissionNoteList", Model.Mission.MissionNotesPinned);
+            }
+
+            @if (Model.Mission.MissionNotes.Any())
+            {
+                await Html.RenderPartialAsync("_MissionNoteList", Model.Mission.MissionNotes);
+            }
+        </ul>
+    </div>
+
+    <li class="list-group-item list-group-item-action" data-toggle="collapse" href="#picSection" role="button"
+        aria-expanded="false" aria-controls="picSection" onclick="animateCaret(this)">
+        <b class="h5 m-0 d-flex flex-row align-items-center justify-content-between" style="font-weight:bold">
+            <span class="fa fa-images pr-3"></span>
+            <span class="mr-auto">Bilder</span>
+            <span class="badge badge-warning badge-pill mr-2">@Model.Mission.MissionImageCount</span>
+            <i class="fa fa-caret-right"></i>
+        </b>
+    </li>
+
+    <div class="collapse" id="picSection">
+        <div class="d-flex flex-column">
+            @if (Model.Mission.MissionImages.Any())
+            {
+            @foreach (var imageUri in Model.Mission.MissionImages)
+                {
+            <a href="@imageUri" class="list-group-item list-group-item-action d-flex flex-row align-items-center">
+                <span class="fa fa-picture-o pr-3"></span>
+                <span class="mr-auto w-75 one-line-text">
+                    @imageUri.Segments[2]
+                </span>
+                <i class="fa fa-download text-success" aria-hidden="true"></i>
+            </a>
+                }
+            }
+        </div>
+    </div>
+
+</ul>
+@if (Model.Uploaded.HasValue)
+{
+@if (Model.Uploaded.Value)
+    {
+<div class="alert-fixed-bot alert-success pt-1">
+    <i class="fa fa-check" aria-hidden="true"></i> @Model.FileCount bilde(r) lastet opp
+</div>
+    }
+    else
+    {
+<div class="alert-fixed-bot alert-danger pt-1">
+    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Opplastningen var mislykket!
+</div>
+    }
+
+}
+
+@section BottomMenuBar {
+    <a asp-page="./Notes/Create" asp-route-id="@Model.Mission.Id" class="mobile-bottom-nav__item border-warning">
+        <div class="mobile-bottom-nav__item-content text-info">
+            <i class="fa fa-notes-medical" aria-hidden="true"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
+    <a class="mobile-bottom-nav__item border-warning" id="camera_upload" onclick="document.getElementById('imageInput').click();">
+        @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
+        {
+        <input type="file" name="files" class="file-input-hide" id="imageInput" onchange="this.parentElement.submit()" multiple>
+        }
+        <div class="mobile-bottom-nav__item-content text-success">
+            <i class="fa fa-camera" aria-hidden="true"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
+    @if (User.IsInRole("Leder"))
+    {
+        <a class="mobile-bottom-nav__item text-warning border-warning" onclick="showVerticalMenu(this)">
+            <div class="mobile-bottom-nav__item-content">
+                <i class="fa fa-cog"></i>
+            </div>
+            <div class="bottom-v-nav-parent">
+                <div class="bottom-v-nav-child" id="bottomRightVMenu">
+                    <a class="bg-dark text-danger p-2 bottom-v-nav-item" id="deleteBtn"
+                       asp-page="./Edit" asp-page-handler="DeleteMission" asp-route-id="@Model.Mission.Id"
+                       onclick="return confirm('Bekreft at du ønsker du å slette dette oppdraget')">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                    <a asp-page="./Edit" asp-route-id="@Model.Mission.Id" class="bg-dark text-warning p-2 bottom-v-nav-item" id="editBtn">
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </a>
+
+
+                </div>
+            </div>
+        </a>
+    }
+}
+@section Scripts {
+    <script>
+        $(function () {
+            window.addEventListener("click", fadeOutAlerts);
+        })
+
+        fadeOutAlerts = function () {
+            setTimeout(function () {
+                var elements = document.getElementsByClassName('alert-fixed-bot');
+                for (let el of elements) {
+                    $(el).animate({ bottom: "-50px" }, 500, function () {
+                        $(this).remove();
+                    });
+                }
+            }, 3000);
+        }
+
+        showVerticalMenu = function (el) {
+            el.classList.toggle("bg-warning");
+            el.classList.toggle("text-warning");
+
+            $("#bottomRightVMenu").toggle(250)
+        }
+
+        animateCaret = function (el) {
+            el.querySelector(".fa-caret-right").classList.toggle("rotate-90");
+        }
+    </script>
+}

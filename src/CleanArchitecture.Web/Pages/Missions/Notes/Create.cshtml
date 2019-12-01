@@ -1,0 +1,49 @@
+@page
+@model CleanArchitecture.Web.Pages.Missions.Notes.CreateModel
+@{
+    ViewData["Title"] = "Lag ny";
+    ViewData["NavTitle"] = "LAG NY";
+    ViewData["NavIcon"] = "fa fa-pen-square";
+}
+
+<form class="p-2" id="createForm" method="post">
+    <div class="form-group">
+        <label asp-for="Note.Title"></label>
+        <input asp-for="Note.Title" class="form-control" placeholder="Skriv inn tittel">
+        <span asp-validation-for="Note.Title" class="text-danger"></span>
+        <small class="form-text text-muted">(valgfri)</small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Note.Content"></label>
+        <textarea asp-for="Note.Content" class="form-control"></textarea>
+        <span asp-validation-for="Note.Content" class="text-danger"></span>
+    </div>
+    @if (User.IsInRole("Leder") || User.IsInRole("Mellomleder"))
+        {
+    <div class="form-group">
+        <input asp-for="Note.Pinned" type="checkbox">
+        <label asp-for="Note.Pinned"></label>
+    </div>
+        }
+    <input type="hidden" asp-for="Note.MissionId" />
+    <input type="submit" id="submitForm" style="display:none" />
+</form>
+
+@section BottomMenuBar {
+    <a asp-page="/Missions/Mission" asp-route-id="@Model.Note.MissionId" class="mobile-bottom-nav__item text-danger border-warning">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-close"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
+    <a onclick="document.getElementById('submitForm').click(); return false;" class="mobile-bottom-nav__item text-success border-warning">
+        <div class="mobile-
+                    bottom-nav__item-content">
+            <i class="fa fa-check"></i>
+        </div>
+    </a>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

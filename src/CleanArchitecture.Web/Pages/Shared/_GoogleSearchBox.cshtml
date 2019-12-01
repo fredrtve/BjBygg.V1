@@ -1,0 +1,30 @@
+@model string
+<script>
+
+        function initSearchBox() {
+
+            var input = document.getElementById('@Model');
+            var options = {
+                types: ['geocode'],
+                componentRestrictions: { country: "no" }
+            };
+
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            autocomplete.addListener('place_changed', function () {
+
+                var place = autocomplete.getPlace();
+                if (place.geometry) {
+                    input.classList.add("border", "border-success");
+                }
+
+            });
+
+                if (input != null) {
+                    input.addEventListener('input', function () {
+                        input.classList.remove("border", "border-success");
+                    });
+                }
+        }
+</script>
+<script src='https://maps.googleapis.com/maps/api/js?key=@ViewData["GoogleMapsApiKey"]&libraries=places&callback=initSearchBox' async defer></script>

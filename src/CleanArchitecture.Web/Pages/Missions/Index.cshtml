@@ -1,0 +1,47 @@
+@page
+@model CleanArchitecture.Web.Pages.Missions.IndexModel
+@{
+    ViewData["Title"] = "Oppdrag";
+    ViewData["NavTitle"] = "OPPDRAG";
+    ViewData["NavIcon"] = "fa fa-tasks";
+}
+
+<form id="searchForm" class="d-flex flex-row p-0 fixed-top" style="height: 40px;top:62px;z-index:100" method="get">
+    <input class="p-1 w-100 m-0" type="text" style="height: 40px;" placeholder="Søk etter oppdrag" name="searchString" aria-label="Search" value="@Model.MissionList.PaginationInfo.CurrentFilter">
+    <a onclick="document.forms['searchForm'].submit(); return false;" class="icon-btn-w25 bg-warning text-dark p-2">
+        <i class="fa fa-search"></i>
+    </a>
+</form>
+
+<ul class="list-group h-100" style="overflow:auto;margin-top:40px;margin-bottom:35px;">
+    @if (!Model.MissionList.Missions.Any())
+            {
+    <h5 class="m-3">Fant ingen oppdrag</h5>
+ }
+            else
+            {
+                foreach (var mission in Model.MissionList.Missions)
+                {
+    <a class="list-group-item list-group-item-action" asp-page="./Mission" asp-route-id="@mission.Id">
+        <b class="m-0 d-flex flex-row align-items-center">
+            <span class="mr-auto">@mission.Address</span>
+            <i class="fa fa-caret-right"></i>
+        </b>
+    </a>
+
+                }
+
+            }
+</ul>
+<partial name="_pagination" for="MissionList.PaginationInfo" />
+
+@section BottomMenuBar {
+    @if (User.IsInRole("Leder") || User.IsInRole("Mellomleder"))
+            {
+    <a asp-page="./Create" class="mobile-bottom-nav__item text-success border-warning">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-plus"></i>
+        </div>
+    </a>
+            }
+}

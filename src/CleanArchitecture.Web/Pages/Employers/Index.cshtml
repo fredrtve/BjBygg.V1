@@ -1,0 +1,47 @@
+@page
+@model CleanArchitecture.Web.Pages.Employers.IndexModel
+@{
+    ViewData["Title"] = "Oppdragsgivere";
+    ViewData["NavTitle"] = "OPPDRAGSGIVERE";
+    ViewData["NavIcon"] = "fa fa-user-tie";
+}
+
+<div class="d-flex flex-column">
+
+    @foreach (var user in Model.Employers)
+    {
+    <div class="p-3" style="border-top:1px solid #000">
+        <div class="d-flex flex-row align-items-center">
+            <i class="fa fa-user-tie pr-2" style="font-size:1.5rem"></i>
+            <span class="mr-auto pl-2">
+                <b>@user.Name</b><br />
+                <small class="text-muted mr-1"><i class="fa fa-phone"></i> @(String.IsNullOrEmpty(user.PhoneNumber) ? "N/A" : user.PhoneNumber)</small><br />
+                <small class="text-muted mr-1"><i class="fa fa-home"></i> @(String.IsNullOrEmpty(user.Address) ? "N/A" : user.Address)</small>
+            </span>
+            @if (User.IsInRole("Leder"))
+                {
+            <span style="font-size:1.5rem" class="d-flex flex-column">
+                <a asp-page="./Edit" asp-page-handler="Delete" asp-route-id="@user.Id"
+                   onclick="return confirm('Bekreft at du ønsker du å slette oppdragsgiver.')">
+                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                </a>
+                <a asp-page="./Edit" asp-route-id="@user.Id">
+                    <li class="fa fa-edit text-warning"></li>
+                </a>
+            </span>
+                }
+
+        </div>
+    </div>
+    }
+
+
+</div>
+
+@section BottomMenuBar {
+    <a asp-page="./Create" class="mobile-bottom-nav__item text-success border-warning">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-plus"></i>
+        </div>
+    </a>
+}
