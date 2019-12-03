@@ -28,13 +28,14 @@ namespace CleanArchitecture.Web.Pages.Users
         public async Task OnGet()
         {
             var employees = await _userManager.GetUsersInRoleAsync("Ansatt");
-            EmployeeList = new UserListViewModel(employees.Select(a => new UserViewModel(a)), "Ansatte", "fa fa-users");
+            var employeeView = employees.Select(a => new UserViewModel(a));
+            EmployeeList = new UserListViewModel(employees.Select(a => new UserViewModel(a) { Role = "Ansatt" }), "Ansatte", "fa fa-users");
 
             var leaders = await _userManager.GetUsersInRoleAsync("Leder");
-            LeaderList = new UserListViewModel(leaders.Select(a => new UserViewModel(a)), "Leder", "fa fa-crown", "bg-warning text-dark");
+            LeaderList = new UserListViewModel(leaders.Select(a => new UserViewModel(a) { Role = "Leder" }), "Leder", "fa fa-crown", "bg-warning text-dark");
 
             var managers = await _userManager.GetUsersInRoleAsync("Mellomleder");
-            ManagerList = new UserListViewModel(managers.Select(a => new UserViewModel(a)), "Mellomledere", "fa fa-users");
+            ManagerList = new UserListViewModel(managers.Select(a => new UserViewModel(a) { Role = "Mellomleder" }), "Mellomledere", "fa fa-users");
         }
 
     }

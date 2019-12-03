@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Endre";
     ViewData["NavTitle"] = "ENDRE";
-    ViewData["NavIcon"] = "fa fa-pencil";
+    ViewData["NavIcon"] = "fa fa-pen-square";
     ViewData["GoogleMapsApiKey"] = Model.GoogleMapsApiKey;
 }
 
@@ -42,7 +42,7 @@
 @section BottomMenuBar {
     <a asp-page="./Mission" asp-route-id="@Model.Mission.Id" class="mobile-bottom-nav__item text-danger border-warning">
         <div class="mobile-bottom-nav__item-content">
-            <i class="fa fa-close"></i>
+            <i class="fa fa-times"></i>
         </div>
     </a>
     <span class="item-seperator bg-warning"></span>

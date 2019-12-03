@@ -32,12 +32,12 @@ namespace CleanArchitecture.Web.Services
         public async Task<bool> DeleteUserByUserName(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
-            if (user != null)
-            {
-                await _userManager.DeleteAsync(user);
-                return true;
-            }
-            return false;
+            var userIsLeader = await _userManager.IsInRoleAsync(user, "Leder");
+
+            if (user == null || userIsLeader) return false;
+            
+            await _userManager.DeleteAsync(user);
+            return true;
         }
 
         public async Task<bool> CreateUserFromViewModel(UserViewModel userView, string password)
@@ -78,7 +78,7 @@ namespace CleanArchitecture.Web.Services
 
             var currentRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
 
-            if (result.Succeeded && currentRole != userView.Role)
+            if (result.Succeeded && currentRole != userView.Role && currentRole != "Leder")
             {
                 await _userManager.RemoveFromRoleAsync(user, currentRole);
                 await _userManager.AddToRoleAsync(user, userView.Role);
