@@ -1,8 +1,5 @@
 using CleanArchitecture.Core.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.ViewModels
 {
@@ -19,6 +16,6 @@ namespace CleanArchitecture.Web.ViewModels
         public string Address { get; set; }
 
         public DateTime CreatedAt { get; set; }
-       
+
     }
 }

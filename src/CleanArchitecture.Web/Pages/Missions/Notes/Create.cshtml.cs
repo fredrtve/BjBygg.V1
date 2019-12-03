@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.Missions.Notes
 {
@@ -31,7 +28,7 @@ namespace CleanArchitecture.Web.Pages.Missions.Notes
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid) return Page();
-  
+
             await _service.CreateMissionNotesFromViewModel(Note);
 
             return RedirectToPage("/Missions/Mission", new { Id = Note.MissionId });

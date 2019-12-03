@@ -1,14 +1,10 @@
-using CleanArchitecture.Web.Interfaces;
-using CleanArchitecture.Core.Interfaces;
-using CleanArchitecture.Web.ViewModels;
-using CleanArchitecture.Core.Specifications;
 using CleanArchitecture.Core.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
+using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Core.Specifications;
+using CleanArchitecture.Web.Interfaces;
+using CleanArchitecture.Web.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace CleanArchitecture.Web.Services
 {
@@ -28,7 +24,7 @@ namespace CleanArchitecture.Web.Services
         }
 
 
-        
+
     }
 
 }

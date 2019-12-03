@@ -9,7 +9,6 @@ using CleanArchitecture.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,24 +16,25 @@ using System.Reflection;
 
 namespace CleanArchitecture.Web
 {
-	public class Startup
-	{
-		public Startup(IConfiguration config) => this.Configuration = config;
+    public class Startup
+    {
+        public Startup(IConfiguration config) => this.Configuration = config;
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		public IServiceProvider ConfigureServices(IServiceCollection services)
-		{
-			
+        public IServiceProvider ConfigureServices(IServiceCollection services)
+        {
+
             services.AddIdentityDbContext();
-            services.AddDefaultIdentity<ApplicationUser>(options => {
+            services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 7;
-                })
+            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
@@ -49,7 +49,7 @@ namespace CleanArchitecture.Web
             services.AddScoped(typeof(IMissionNoteViewModelService), typeof(MissionNoteViewModelService));
             services.AddScoped(typeof(IMissionViewModelService), typeof(MissionViewModelService));
             services.AddScoped(typeof(IEmployerViewModelService), typeof(EmployerViewModelService));
-            services.AddScoped(typeof(IUserViewModelService), typeof(UserViewModelService));        
+            services.AddScoped(typeof(IUserViewModelService), typeof(UserViewModelService));
 
             services.AddSingleton<IBlobStorageService, AzureBlobStorageService>();
 
@@ -58,26 +58,26 @@ namespace CleanArchitecture.Web
             services.AddRazorPages()
                 .AddRazorPagesOptions(options =>
                 {
-                   
+
                 });
 
             return ContainerSetup.InitializeWeb(Assembly.GetExecutingAssembly(), services);
-		}
+        }
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			if (env.EnvironmentName == "Development")
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Error");
-				app.UseHsts();
-			}
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.EnvironmentName == "Development")
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
-			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -86,7 +86,7 @@ namespace CleanArchitecture.Web
 
             app.UseEndpoints(endpoints =>
             {
-       
+
                 endpoints.MapRazorPages();
             });
         }

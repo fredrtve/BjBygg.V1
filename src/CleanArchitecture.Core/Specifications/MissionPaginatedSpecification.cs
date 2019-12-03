@@ -8,7 +8,7 @@ namespace CleanArchitecture.Core.Specifications
             : base(m => true)
         {
             ApplyOrderByDescending(x => x.CreatedAt);
-            ApplyPaging(skip, take);      
+            ApplyPaging(skip, take);
         }
 
     }

@@ -1,5 +1,4 @@
 using CleanArchitecture.Core.Entities;
-using System;
 
 namespace CleanArchitecture.Core.Specifications
 {

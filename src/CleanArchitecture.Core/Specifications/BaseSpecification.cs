@@ -1,7 +1,7 @@
+using CleanArchitecture.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Core.Specifications
 {

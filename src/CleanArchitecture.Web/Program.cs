@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web
@@ -38,10 +36,10 @@ namespace CleanArchitecture.Web
 
                     await AppIdentityDbContextSeed.SeedAsync(userManager, roleManager);
                 }
-               
 
-        
-                    
+
+
+
             }
 
             host.Run();

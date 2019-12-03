@@ -1,6 +1,5 @@
 using CleanArchitecture.SharedKernel;
 using System;
-using System.Collections.Generic;
 
 namespace CleanArchitecture.Core.SharedKernel
 {

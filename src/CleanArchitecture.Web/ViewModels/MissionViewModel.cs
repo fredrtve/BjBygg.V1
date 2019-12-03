@@ -1,15 +1,11 @@
 using CleanArchitecture.Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.ViewModels
 {
     public class MissionViewModel
     {
-        public MissionViewModel(){}
+        public MissionViewModel() { }
         public MissionViewModel(Mission mission)
         {
             Id = mission.Id;

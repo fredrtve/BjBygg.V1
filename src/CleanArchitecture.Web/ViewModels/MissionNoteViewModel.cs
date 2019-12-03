@@ -1,9 +1,6 @@
 using CleanArchitecture.Core.Entities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.ViewModels
 {
@@ -23,7 +20,7 @@ namespace CleanArchitecture.Web.ViewModels
 
         public int Id { get; set; }
 
-        [Required]       
+        [Required]
         public int MissionId { get; set; }
 
         [StringLength(75, ErrorMessage = "{0} kan maks være på {1} tegn.")]

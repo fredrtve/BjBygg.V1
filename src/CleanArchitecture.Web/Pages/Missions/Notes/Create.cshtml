@@ -19,12 +19,12 @@
         <span asp-validation-for="Note.Content" class="text-danger"></span>
     </div>
     @if (User.IsInRole("Leder") || User.IsInRole("Mellomleder"))
-        {
-    <div class="form-group">
-        <input asp-for="Note.Pinned" type="checkbox">
-        <label asp-for="Note.Pinned"></label>
-    </div>
-        }
+    {
+        <div class="form-group">
+            <input asp-for="Note.Pinned" type="checkbox">
+            <label asp-for="Note.Pinned"></label>
+        </div>
+    }
     <input type="hidden" asp-for="Note.MissionId" />
     <input type="submit" id="submitForm" style="display:none" />
 </form>

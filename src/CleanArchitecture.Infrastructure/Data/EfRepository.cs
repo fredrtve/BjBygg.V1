@@ -1,7 +1,6 @@
 using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.Core.SharedKernel;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +33,7 @@ namespace CleanArchitecture.Infrastructure.Data
 
         public async Task<int> CountAsync(ISpecification<T> spec = null)
         {
-            if(spec == null) return await _dbContext.Set<T>().CountAsync();
+            if (spec == null) return await _dbContext.Set<T>().CountAsync();
             return await ApplySpecification(spec).CountAsync();
         }
 

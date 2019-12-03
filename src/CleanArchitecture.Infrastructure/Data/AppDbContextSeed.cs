@@ -13,16 +13,16 @@ namespace CleanArchitecture.Infrastructure.Data
             try
             {
                 // TODO: Only run this if using a real database
-                // context.Database.Migrate();
-                if (!context.Employers.Any())
-                {
-                    context.Database.OpenConnection();
-                    context.Employers.AddRange(
-                        GetPreconfiguredEmployers());
+                //// context.Database.Migrate();
+                //if (!context.Employers.Any())
+                //{
+                //    context.Database.OpenConnection();
+                //    context.Employers.AddRange(
+                //        GetPreconfiguredEmployers());
 
-                    context.SaveChanges();
-                    context.Database.CloseConnection();
-                }
+                //    context.SaveChanges();
+                //    context.Database.CloseConnection();
+                //}
                 if (!context.MissionTypes.Any())
                 {
                     context.Database.OpenConnection();
@@ -32,24 +32,24 @@ namespace CleanArchitecture.Infrastructure.Data
                     context.SaveChanges();
                     context.Database.CloseConnection();
                 }
-                if (!context.Missions.Any())
-                {
-                    context.Database.OpenConnection();
-                    context.Missions.AddRange(
-                        GetPreconfiguredMissions());
+                //if (!context.Missions.Any())
+                //{
+                //    context.Database.OpenConnection();
+                //    context.Missions.AddRange(
+                //        GetPreconfiguredMissions());
 
-                    context.SaveChanges();
-                    context.Database.CloseConnection();
-                }
-                if (!context.MissionNotes.Any())
-                {
-                    context.Database.OpenConnection();
-                    context.MissionNotes.AddRange(
-                        GetPreconfiguredMissionNotes());
+                //    context.SaveChanges();
+                //    context.Database.CloseConnection();
+                //}
+                //if (!context.MissionNotes.Any())
+                //{
+                //    context.Database.OpenConnection();
+                //    context.MissionNotes.AddRange(
+                //        GetPreconfiguredMissionNotes());
 
-                    context.SaveChanges();
-                    context.Database.CloseConnection();
-                }
+                //    context.SaveChanges();
+                //    context.Database.CloseConnection();
+                //}
 
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace CleanArchitecture.Infrastructure.Data
                         Id = idCounter,
                         MissionId = missionId,
                         Content = "Dette er ett veldig interessant notat. Veldig interessant. Det er også veldig viktig.",
-                        Title =  "Dette er ett notat",
+                        Title = "Dette er ett notat",
                         Pinned = false
                     });
                     idCounter++;

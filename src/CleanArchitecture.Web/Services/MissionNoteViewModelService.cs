@@ -2,9 +2,6 @@ using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Services
@@ -24,7 +21,7 @@ namespace CleanArchitecture.Web.Services
             {
                 Title = noteModel.Title,
                 Content = noteModel.Content,
-                MissionId =  noteModel.MissionId,
+                MissionId = noteModel.MissionId,
                 Pinned = noteModel.Pinned
             });
         }

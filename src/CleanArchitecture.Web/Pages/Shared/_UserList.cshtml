@@ -11,7 +11,7 @@
             <i class="fa fa-user-tie pr-2" style="font-size:1.5rem"></i>
             <span class="mr-auto pl-2">
                 <b>@user.FirstName @user.LastName</b><br />
-                <small class="text-muted mr-1"><i class="fa fa-user-circle"></i> @user.UserName @user.Role</small><br />
+                <small class="text-muted mr-1"><i class="fa fa-user-circle"></i> @user.UserName</small><br />
                 <small class="text-muted mr-1"><i class="fa fa-phone"></i> @(String.IsNullOrEmpty(user.PhoneNumber) ? "N/A" : user.PhoneNumber)</small>
             </span>
             @if (User.IsInRole("Leder") && user.Role != "Leder")

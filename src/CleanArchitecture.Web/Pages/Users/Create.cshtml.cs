@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using CleanArchitecture.Infrastructure.Identity;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.Users
 {
@@ -44,12 +40,12 @@ namespace CleanArchitecture.Web.Pages.Users
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid) return Page();
-            
-            var result = await _service.CreateUserFromViewModel(UserView, Password);          
+
+            var result = await _service.CreateUserFromViewModel(UserView, Password);
 
             if (result) return RedirectToPage("./Index");
-            
-           return Page();
+
+            return Page();
         }
     }
 }

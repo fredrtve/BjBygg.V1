@@ -1,16 +1,11 @@
-using CleanArchitecture.Core.Interfaces;
+using Ardalis.EFCore.Extensions;
+using CleanArchitecture.Core.Entities;
+using CleanArchitecture.SharedKernel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CleanArchitecture.Core.Entities;
-using CleanArchitecture.Core.SharedKernel;
-using Ardalis.EFCore.Extensions;
-using System.Reflection;
-using JetBrains.Annotations;
-using System;
-using Microsoft.AspNetCore.Http;
-using CleanArchitecture.SharedKernel;
 
 namespace CleanArchitecture.Infrastructure.Data
 {
@@ -84,8 +79,8 @@ namespace CleanArchitecture.Infrastructure.Data
             var httpContext = _httpContextAccessor.HttpContext;
             string user = null;
 
-            if(httpContext != null) user = httpContext.User.Identity.Name;
-            
+            if (httpContext != null) user = httpContext.User.Identity.Name;
+
             return user;
         }
     }

@@ -1,11 +1,11 @@
-using System;
-using System.Threading.Tasks;
 using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.Missions
 {
@@ -32,7 +32,7 @@ namespace CleanArchitecture.Web.Pages.Missions
         {
             Mission = await _missionService.GetMissionDetailed(id);
             Uploaded = uploaded;
-            FileCount = fileCount;          
+            FileCount = fileCount;
         }
 
         public async Task<IActionResult> OnPost(int id)
@@ -51,7 +51,7 @@ namespace CleanArchitecture.Web.Pages.Missions
                 }
 
                 await _imageUploader.UploadCollection(files, id);
-                
+
                 return RedirectToPage("./Mission", new { id, uploaded, fileCount });
             }
             catch (Exception ex)

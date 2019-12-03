@@ -1,15 +1,11 @@
 using CleanArchitecture.Infrastructure.Identity;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.ViewModels
 {
     public class UserViewModel
     {
-        public UserViewModel() {}
+        public UserViewModel() { }
         public UserViewModel(ApplicationUser user)
         {
             UserName = user.UserName;
@@ -36,7 +32,7 @@ namespace CleanArchitecture.Web.ViewModels
 
         [Display(Name = "Mobil")]
         [DataType(DataType.PhoneNumber)]
-        [StringLength(12, ErrorMessage = "{0} må være mellom {2} og {1} tegn.", MinimumLength = 4)]        
+        [StringLength(12, ErrorMessage = "{0} må være mellom {2} og {1} tegn.", MinimumLength = 4)]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Epost")]

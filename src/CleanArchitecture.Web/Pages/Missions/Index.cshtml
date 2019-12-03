@@ -15,33 +15,39 @@
 
 <ul class="list-group h-100" style="overflow:auto;margin-top:40px;margin-bottom:35px;">
     @if (!Model.MissionList.Missions.Any())
-            {
-    <h5 class="m-3">Fant ingen oppdrag</h5>
- }
-            else
-            {
-                foreach (var mission in Model.MissionList.Missions)
-                {
-    <a class="list-group-item list-group-item-action" asp-page="./Mission" asp-route-id="@mission.Id">
-        <b class="m-0 d-flex flex-row align-items-center">
-            <span class="mr-auto">@mission.Address</span>
-            <i class="fa fa-caret-right"></i>
-        </b>
-    </a>
+    {
+        <h5 class="m-3">Fant ingen oppdrag</h5>
+    }
+    else
+    {
+        foreach (var mission in Model.MissionList.Missions)
+        {
+            <a class="list-group-item list-group-item-action" asp-page="./Mission" asp-route-id="@mission.Id">
+                <b class="m-0 d-flex flex-row align-items-center">
+                    <span class="mr-auto">@mission.Address</span>
+                    <i class="fa fa-caret-right"></i>
+                </b>
+            </a>
 
-                }
+        }
 
-            }
+    }
 </ul>
 <partial name="_pagination" for="MissionList.PaginationInfo" />
 
 @section BottomMenuBar {
-    @if (User.IsInRole("Leder") || User.IsInRole("Mellomleder"))
-            {
-    <a asp-page="./Create" class="mobile-bottom-nav__item text-success border-warning">
-        <div class="mobile-bottom-nav__item-content">
-            <i class="fa fa-plus"></i>
+    <a asp-page="/Index" class="mobile-bottom-nav__item border-warning">
+        <div class="mobile-bottom-nav__item-content text-warning">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </div>
     </a>
-            }
+    <span class="item-seperator bg-warning"></span>
+    @if (User.IsInRole("Leder") || User.IsInRole("Mellomleder"))
+    {
+        <a asp-page="./Create" class="mobile-bottom-nav__item text-success border-warning">
+            <div class="mobile-bottom-nav__item-content">
+                <i class="fa fa-plus"></i>
+            </div>
+        </a>
+    }
 }

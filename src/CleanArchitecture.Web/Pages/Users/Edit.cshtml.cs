@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.Users
 {
@@ -27,7 +25,7 @@ namespace CleanArchitecture.Web.Pages.Users
         public IEnumerable<SelectListItem> Roles { get; set; }
 
         public async Task OnGet(string userName)
-        {          
+        {
             UserView = await _service.GetUserFromId(userName);
             Roles = _service.GetRoles(UserView.Role);
         }

@@ -3,7 +3,6 @@ using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +34,7 @@ namespace CleanArchitecture.Web.Services
             var userIsLeader = await _userManager.IsInRoleAsync(user, "Leder");
 
             if (user == null || userIsLeader) return false;
-            
+
             await _userManager.DeleteAsync(user);
             return true;
         }
@@ -72,7 +71,7 @@ namespace CleanArchitecture.Web.Services
             user.Email = userView.Email;
             user.FirstName = userView.FirstName;
             user.LastName = userView.LastName;
-            user.PhoneNumber = userView.PhoneNumber;        
+            user.PhoneNumber = userView.PhoneNumber;
 
             var result = await _userManager.UpdateAsync(user);
 
@@ -92,7 +91,7 @@ namespace CleanArchitecture.Web.Services
         {
             var items = new List<SelectListItem>();
 
-            foreach (var role in  _roleManager.Roles.Where(x => x.Name != "Leder"))
+            foreach (var role in _roleManager.Roles.Where(x => x.Name != "Leder"))
             {
                 if (role.Name == selectedRole)
                     items.Add(new SelectListItem() { Value = role.Name, Text = role.Name, Selected = true });

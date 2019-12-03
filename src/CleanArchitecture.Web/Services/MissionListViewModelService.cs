@@ -1,13 +1,13 @@
-using CleanArchitecture.Web.Interfaces;
-using CleanArchitecture.Core.Interfaces;
-using CleanArchitecture.Web.ViewModels;
-using CleanArchitecture.Core.Specifications;
 using CleanArchitecture.Core.Entities;
+using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Core.Specifications;
+using CleanArchitecture.Web.Interfaces;
+using CleanArchitecture.Web.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Globalization;
 
 namespace CleanArchitecture.Web.Services
 {

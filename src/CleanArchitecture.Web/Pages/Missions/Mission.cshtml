@@ -102,6 +102,12 @@
 }
 
 @section BottomMenuBar {
+    <a asp-page="./Index" class="mobile-bottom-nav__item border-warning">
+        <div class="mobile-bottom-nav__item-content text-warning">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </div>
+    </a>
+    <span class="item-seperator bg-warning"></span>
     <a asp-page="./Notes/Create" asp-route-id="@Model.Mission.Id" class="mobile-bottom-nav__item border-warning">
         <div class="mobile-bottom-nav__item-content text-info">
             <i class="fa fa-notes-medical" aria-hidden="true"></i>
@@ -120,25 +126,25 @@
     <span class="item-seperator bg-warning"></span>
     @if (User.IsInRole("Leder"))
     {
-        <a class="mobile-bottom-nav__item text-warning border-warning" onclick="showVerticalMenu(this)">
-            <div class="mobile-bottom-nav__item-content">
-                <i class="fa fa-cog"></i>
-            </div>
-            <div class="bottom-v-nav-parent">
-                <div class="bottom-v-nav-child" id="bottomRightVMenu">
-                    <a class="bg-dark text-danger p-2 bottom-v-nav-item" id="deleteBtn"
-                       asp-page="./Edit" asp-page-handler="DeleteMission" asp-route-id="@Model.Mission.Id"
-                       onclick="return confirm('Bekreft at du ønsker du å slette dette oppdraget')">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-                    <a asp-page="./Edit" asp-route-id="@Model.Mission.Id" class="bg-dark text-warning p-2 bottom-v-nav-item" id="editBtn">
-                        <i class="fa fa-pen-square" aria-hidden="true"></i>
-                    </a>
+    <a class="mobile-bottom-nav__item text-warning border-warning" onclick="showVerticalMenu(this)">
+        <div class="mobile-bottom-nav__item-content">
+            <i class="fa fa-cog"></i>
+        </div>
+        <div class="bottom-v-nav-parent">
+            <div class="bottom-v-nav-child" id="bottomRightVMenu">
+                <a class="bg-dark text-danger p-2 bottom-v-nav-item" id="deleteBtn"
+                   asp-page="./Edit" asp-page-handler="DeleteMission" asp-route-id="@Model.Mission.Id"
+                   onclick="return confirm('Bekreft at du ønsker du å slette dette oppdraget')">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+                <a asp-page="./Edit" asp-route-id="@Model.Mission.Id" class="bg-dark text-warning p-2 bottom-v-nav-item" id="editBtn">
+                    <i class="fa fa-pen-square" aria-hidden="true"></i>
+                </a>
 
 
-                </div>
             </div>
-        </a>
+        </div>
+    </a>
     }
 }
 @section Scripts {

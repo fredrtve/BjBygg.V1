@@ -1,5 +1,3 @@
-using CleanArchitecture.Core.Entities;
-using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.Missions
@@ -50,7 +47,7 @@ namespace CleanArchitecture.Web.Pages.Missions
                 GoogleMapsApiKey = _config["GoogleMapsApiKey"];
                 return Page();
             }
-            
+
             await _service.CreateMissionFromViewModel(Mission);
 
             return RedirectToPage("./Index");

@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CleanArchitecture.Core.Specifications;
 using CleanArchitecture.Web.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Web.Pages.Missions
 {
@@ -27,8 +24,8 @@ namespace CleanArchitecture.Web.Pages.Missions
 
         public async Task OnGet(string searchString, int? pageId)
         {
-           MissionList = await _missionListService.GetMissionList(pageId ?? 0, Constants.ITEMS_PER_PAGE, searchString);
-           MissionList.PaginationInfo.CurrentFilter = searchString;
+            MissionList = await _missionListService.GetMissionList(pageId ?? 0, Constants.ITEMS_PER_PAGE, searchString);
+            MissionList.PaginationInfo.CurrentFilter = searchString;
         }
     }
 }
